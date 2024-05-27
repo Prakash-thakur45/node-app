@@ -1,11 +1,11 @@
 // data.js (ES module)
 import fs from 'fs';
-
+import path from 'path';
 // Read data from 'data.json'
-const data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
-const users = data.users;
+// const data = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../data.json'), 'utf-8'));
+// const users = data.users;
 
-export { users };
+// export { users };
 
 // userController.js (ES module)
 export const createUser = (req, res,next) => {
