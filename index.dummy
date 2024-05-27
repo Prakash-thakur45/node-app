@@ -1,0 +1,249 @@
+// import {sum,diff} from './lib.js';
+// import {unlink} from 'node:fs';
+
+// ===>> server creation with the help of node....
+
+// import http from "http";
+// import fs from 'fs';
+// const dataa=fs.readFileSync('index.html','utf-8');
+// const index=JSON.parse(fs.readFileSync('data.json','utf-8'));
+// const products=index.products;
+
+// const fs=fs.unlink;
+// const fs= require('node:fs');
+// const txt=fs.readFileSync('demo.txt');
+// console.log(txt);
+// console.log(lib.sum(4,5),diff(2,4));
+
+// const server=express();
+
+// const data={prakash:45};
+// const server=http.createServer((req,res)=>{
+//     console.log("server started");
+    // res.setHeader('Dummy','DummyValue');
+    // console.log(dataa);
+
+    // if(req.url.startsWith('/product'))
+    // {
+    //     const id=req.url.split('/')[2];
+    //     const product=products.find(p=>p.id===(+id));
+    //     res.setHeader('Content-Type','text/html');
+    //            let dataaMain= dataa.replace('**title**',product.title)
+    //            .replace('**url**',product.thumbnail)
+    //            .replace('**price**',product.price)
+    //            .replace('**rating**',product.rating);
+    //             res.end(dataaMain);
+    //     console.log(product);
+    //     return ;
+    // }
+    // switch(req.url)
+    // {
+    //     case '/':
+    //     {
+    //         res.setHeader('Content-Type','text/html');
+    //         res.repl
+    //         res.end(dataa);
+    //         break;
+    //     }
+        // case '/product':
+        //     {
+        //         res.setHeader('Content-Type','text/html');
+        //        let dataaMain= dataa.replace('**title**',product.title)
+        //        .replace('**url**',product.thumbnail)
+        //        .replace('**price**',product.price)
+        //        .replace('**rating**',product.rating);
+        //         res.end(dataaMain);
+        //         break;
+        //     }
+//         case '/api':
+//         {
+          
+//             res.setHeader('Content-Type','application/json');
+//             res.end(index);
+//             break;
+//         }
+//         default:
+//         {
+//             res.writeHead(404,"nt found");
+//             res.end();
+//         }
+//     }
+// })
+// server.listen(8080);
+// console.log('Hello worlddd');
+
+
+// ==> server creation with the help of Express....==>
+
+// import express from "express";
+// import fs from 'fs';
+// import morgan from "morgan";
+import express from "express";
+import{product as p} from "./controller/product";
+const server=express();
+server.use(express.json());
+
+
+// const index=fs.readFileSync('index.html','utf-8');
+// const data=JSON.parse(fs.readFileSync('data.json','utf-8'));
+// const products=data.products;
+
+// const server=express();
+
+// server.use(morgan("default"));
+// server.use((req,res,next)=>{
+//     console.log(req.method,req.ip,req.hostname,new Date(),req.get("User-Agent"));
+//     next();
+
+// })
+
+//body parser
+// server.use(express.json());
+//body parser related to url 
+// 
+
+//MVC
+// const getProducts= (req,res)=>
+// {
+//     res.json(products);
+// }
+// const getProduct=(req,res)=>{
+//     const id=+req.params.id;
+//     const product=products.find(p=>p.id===id);
+//     console.log(product);
+//     res.json(product);
+// }
+
+// const createProduct=(req,res)=>{
+//          products.push(req.body);
+//          console.log(req.body);
+//          res.json(req.body);
+//     }
+
+// const updateProduct=(req,res)=>{
+//           products.push(req.body);
+//           console.log(req.body);
+//           res.json(req.body);
+//      }
+// const updatePatch=(req,res)=>{
+//          const id =+req.params.id;
+//          const productIndex=products.findIndex(p=>p.id===id);
+//          const product=products[productIndex];
+//          products.splice(productIndex,1,{...product,...req.body});
+//          res.status(201).json();
+//      }
+
+// const deleteProduct=(req,res)=>{
+//     const id =+req.params.id;
+//     const productIndex=products.findIndex(p=>p.id===id);
+//     const product=products[productIndex];
+//     products.splice(productIndex,1);
+//     res.status(201).json(product);
+// } 
+
+//static hosting
+
+// server.use(express.static('public'));
+
+
+// const auth= (req,res,next)=>{
+                            //    console.log(req.query);
+                            //    if(req.body.password=="123")
+                            //    {
+                            //       next();
+                            //    }
+                            //    else{
+                            //            res.sendStatus(401);
+                            //    }
+                            // next();
+// }
+// server.use(auth);
+
+//REST API 
+//Read GET API
+// server.get('/products',(req,res)=>
+// {
+//     res.json(products);
+// })
+
+//Read Get /products/:id
+// server.get('/products/:id',(req,res)=>{
+//      const id=+req.params.id;
+//      const product=products.find(p=>p.id===id);
+//      console.log(product);
+//      res.json(product);
+// })
+server.get("/products",getProducts)
+server.get("/products/:id",getProduct)
+
+
+//Create Post/ products
+// server.post('/products',(req,res)=>{
+//      products.push(req.body);
+//      console.log(req.body);
+//      res.json(req.body);
+// })
+server.post('/products',createProduct);
+
+//update Post/ products/with the help of put and patch
+// server.put('/products/:id',(req,res)=>{
+//       const id =+req.params.id;
+//       const productIndex=products.find(p=>p.id===id);
+//       products.splice(productIndex,1,{id:id,...req.body});
+//       res.status(201).json();
+// })
+
+// server.patch('/products/:id',(req,res)=>{
+//     const id =+req.params.id;
+//     const productIndex=products.findIndex(p=>p.id===id);
+//     const product=products[productIndex];
+//     products.splice(productIndex,1,{...product,...req.body});
+//     res.status(201).json();
+// })
+server.put('/products/:id',updateProduct);
+server.patch('/products/:id',updatePatch);
+
+//delete API
+// server.delete('/products/:id',(req,res)=>{
+//     const id =+req.params.id;
+//     const productIndex=products.findIndex(p=>p.id===id);
+//     const product=products[productIndex];
+//     products.splice(productIndex,1);
+//     res.status(201).json(product);
+// })
+server.delete('/products/:id',deleteProduct);
+
+// API- End-Point - Route
+// server.get('/product/:id',(req,res)=>{
+//       console.log(req.params)
+//       res.json({type:"get"});
+// })
+
+// server.post('/',auth,(req,res)=>{
+//     res.json({type:"post"});
+// })
+
+// server.delete('/',(req,res)=>{
+//     res.json({type:"delete"});
+// })
+
+// server.patch('/',(req,res)=>{
+//     res.json({type:"patch"});
+// })
+
+// server.get('/',(req,res)=>
+// {
+    //  res.sendStatus(405);
+    //  res.send('<h1>hello</h1>');
+    //  res.sendFile("C:\Users\Prakash Thakur\Desktop\Node App\index.html");
+        // res.json(products);
+        // res.send(index);
+    //  res.setHeader('Content-Type','type/html');
+// })
+        
+
+server.listen(8080,()=>{
+    console.log("server started");
+})
+
+
